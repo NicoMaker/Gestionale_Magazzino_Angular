@@ -1,5 +1,14 @@
 import {
-  ChangeDetectionStrategy, Component, ElementRef, HostListener, computed, effect, inject, input, model, signal,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  HostListener,
+  computed,
+  effect,
+  inject,
+  input,
+  model,
+  signal,
 } from '@angular/core';
 
 export interface SelectOption {
@@ -31,10 +40,16 @@ export interface SelectOption {
       />
       <div class="search-results" [class.show]="show() && !disabled()">
         @for (o of results(); track o.id) {
-          <div class="search-result-item" [class.selected]="o.id === value()" (mousedown)="pick(o, $event)">
+          <div
+            class="search-result-item"
+            [class.selected]="o.id === value()"
+            (mousedown)="pick(o, $event)"
+          >
             <span class="search-result-name">{{ o.label }}</span>
             @if (o.meta || o.extra) {
-              <span class="search-result-meta">{{ o.meta }}{{ o.meta && o.extra ? ' · ' : '' }}{{ o.extra }}</span>
+              <span class="search-result-meta"
+                >{{ o.meta }}{{ o.meta && o.extra ? ' · ' : '' }}{{ o.extra }}</span
+              >
             }
           </div>
         } @empty {
@@ -66,7 +81,9 @@ export class SearchSelectComponent {
     const filtered =
       sel !== null || !q
         ? list
-        : list.filter((o) => `${o.label} ${o.meta ?? ''} ${o.extra ?? ''}`.toLowerCase().includes(q));
+        : list.filter((o) =>
+            `${o.label} ${o.meta ?? ''} ${o.extra ?? ''}`.toLowerCase().includes(q),
+          );
     return filtered.slice(0, 60);
   });
 

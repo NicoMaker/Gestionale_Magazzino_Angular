@@ -30,37 +30,44 @@ export const routes: Routes = [
       {
         path: 'marche',
         title: 'Marche - Gestione Magazzino Moto',
-        loadComponent: () => import('./pages/marche/marche.component').then((m) => m.MarcheComponent),
+        loadComponent: () =>
+          import('./pages/marche/marche.component').then((m) => m.MarcheComponent),
       },
       {
         path: 'prodotti',
         title: 'Prodotti - Gestione Magazzino Moto',
-        loadComponent: () => import('./pages/prodotti/prodotti.component').then((m) => m.ProdottiComponent),
+        loadComponent: () =>
+          import('./pages/prodotti/prodotti.component').then((m) => m.ProdottiComponent),
       },
       {
         path: 'movimenti',
         title: 'Movimenti - Gestione Magazzino Moto',
-        loadComponent: () => import('./pages/movimenti/movimenti.component').then((m) => m.MovimentiComponent),
+        loadComponent: () =>
+          import('./pages/movimenti/movimenti.component').then((m) => m.MovimentiComponent),
       },
       {
         path: 'riordino',
         title: 'Riordino - Gestione Magazzino Moto',
-        loadComponent: () => import('./pages/riordino/riordino.component').then((m) => m.RiordinoComponent),
+        loadComponent: () =>
+          import('./pages/riordino/riordino.component').then((m) => m.RiordinoComponent),
       },
       {
         path: 'riepilogo',
         title: 'Riepilogo - Gestione Magazzino Moto',
-        loadComponent: () => import('./pages/riepilogo/riepilogo.component').then((m) => m.RiepilogoComponent),
+        loadComponent: () =>
+          import('./pages/riepilogo/riepilogo.component').then((m) => m.RiepilogoComponent),
       },
       {
         path: 'storico',
         title: 'Storico - Gestione Magazzino Moto',
-        loadComponent: () => import('./pages/storico/storico.component').then((m) => m.StoricoComponent),
+        loadComponent: () =>
+          import('./pages/storico/storico.component').then((m) => m.StoricoComponent),
       },
       {
         path: 'utenti',
         title: 'Utenti - Gestione Magazzino Moto',
-        loadComponent: () => import('./pages/utenti/utenti.component').then((m) => m.UtentiComponent),
+        loadComponent: () =>
+          import('./pages/utenti/utenti.component').then((m) => m.UtentiComponent),
       },
     ],
   },

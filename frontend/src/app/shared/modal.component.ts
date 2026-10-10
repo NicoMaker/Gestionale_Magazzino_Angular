@@ -24,7 +24,9 @@ import { ChangeDetectionStrategy, Component, HostListener, input, output } from 
               <h2>{{ title() }}</h2>
               <ng-content select="[modal-subtitle]" />
             </div>
-            <button type="button" class="modal-close" aria-label="Chiudi" (click)="closed.emit()">&times;</button>
+            <button type="button" class="modal-close" aria-label="Chiudi" (click)="closed.emit()">
+              &times;
+            </button>
           </div>
           <ng-content />
         </div>

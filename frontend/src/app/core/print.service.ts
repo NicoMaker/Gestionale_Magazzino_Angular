@@ -25,7 +25,11 @@ const PRINT_CSS = `
 export class PrintService {
   private readonly companySvc = inject(CompanyService);
 
-  printGiacenze(tipo: 'riepilogo' | 'storico', righe: RigaGiacenza[], dataStorico?: string): boolean {
+  printGiacenze(
+    tipo: 'riepilogo' | 'storico',
+    righe: RigaGiacenza[],
+    dataStorico?: string,
+  ): boolean {
     if (!righe.length) return false;
 
     const isStorico = tipo === 'storico';
@@ -68,7 +72,8 @@ export class PrintService {
         const lotti = p.lotti?.length
           ? `<table><thead><tr><th>Data Carico</th><th>Quantità (PZ/L)</th><th>Prezzo Unitario</th><th>Valore</th><th>Documento/Fattura</th><th>Fornitore</th></tr></thead><tbody>${p.lotti
               .map(
-                (l) => `<tr class="lotto-row"><td>${formatDateIT(l.data_carico)}</td><td>${formatQuantity(l.quantita_rimanente)}</td><td>${formatCurrency(l.prezzo)}</td><td><strong>${formatCurrency(l.quantita_rimanente * l.prezzo)}</strong></td><td>${escapeHtml(l.fattura_doc) || '-'}</td><td>${escapeHtml(l.fornitore) || '-'}</td></tr>`,
+                (l) =>
+                  `<tr class="lotto-row"><td>${formatDateIT(l.data_carico)}</td><td>${formatQuantity(l.quantita_rimanente)}</td><td>${formatCurrency(l.prezzo)}</td><td><strong>${formatCurrency(l.quantita_rimanente * l.prezzo)}</strong></td><td>${escapeHtml(l.fattura_doc) || '-'}</td><td>${escapeHtml(l.fornitore) || '-'}</td></tr>`,
               )
               .join('')}</tbody></table>`
           : '';
@@ -84,7 +89,14 @@ export class PrintService {
 
   private printHtml(content: string): void {
     const iframe = document.createElement('iframe');
-    Object.assign(iframe.style, { position: 'fixed', right: '0', bottom: '0', width: '0', height: '0', border: '0' });
+    Object.assign(iframe.style, {
+      position: 'fixed',
+      right: '0',
+      bottom: '0',
+      width: '0',
+      height: '0',
+      border: '0',
+    });
     document.body.appendChild(iframe);
     const win = iframe.contentWindow!;
     const doc = iframe.contentDocument ?? win.document;

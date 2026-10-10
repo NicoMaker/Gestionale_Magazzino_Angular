@@ -17,8 +17,13 @@ export class MarcheService {
   constructor() {
     inject(SocketService)
       .on(
-        'marca_aggiunta', 'marca_modificata', 'marca_eliminata', 'marche_aggiornate',
-        'prodotto_aggiunto', 'prodotto_eliminato', 'prodotti_aggiornati',
+        'marca_aggiunta',
+        'marca_modificata',
+        'marca_eliminata',
+        'marche_aggiornate',
+        'prodotto_aggiunto',
+        'prodotto_eliminato',
+        'prodotti_aggiornati',
       )
       .pipe(debounceTime(250))
       .subscribe(() => this.loaded && void this.load());

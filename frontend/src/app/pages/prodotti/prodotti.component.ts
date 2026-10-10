@@ -63,22 +63,38 @@ import { SearchSelectComponent, SelectOption } from '../../shared/search-select.
                     <strong>{{ p.nome }}</strong>
                   </td>
                   <td>
-                    <span class="badge badge-marca">{{ p.marca_nome ? p.marca_nome.toUpperCase() : 'N/A' }}</span>
+                    <span class="badge badge-marca">{{
+                      p.marca_nome ? p.marca_nome.toUpperCase() : 'N/A'
+                    }}</span>
                   </td>
                   <td>
-                    <span [class]="!p.giacenza ? 'badge-giacenza-zero' : 'badge-giacenza'">{{ qty(p.giacenza) }}</span>
+                    <span [class]="!p.giacenza ? 'badge-giacenza-zero' : 'badge-giacenza'">{{
+                      qty(p.giacenza)
+                    }}</span>
                   </td>
                   <td>{{ p.descrizione || '-' }}</td>
                   <td class="text-right">
-                    <button type="button" class="btn-icon btn-modifica" title="Modifica" (click)="openModal(p)">
+                    <button
+                      type="button"
+                      class="btn-icon btn-modifica"
+                      title="Modifica"
+                      (click)="openModal(p)"
+                    >
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
                         <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
                       </svg>
                     </button>
-                    <button type="button" class="btn-icon btn-elimina" title="Elimina" (click)="elimina(p)">
+                    <button
+                      type="button"
+                      class="btn-icon btn-elimina"
+                      title="Elimina"
+                      (click)="elimina(p)"
+                    >
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                        <path
+                          d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+                        />
                       </svg>
                     </button>
                   </td>
@@ -88,7 +104,9 @@ import { SearchSelectComponent, SelectOption } from '../../shared/search-select.
                   <tr>
                     <td colspan="5" class="text-center">
                       <div style="padding: 40px 20px; color: var(--text-secondary)">
-                        <p style="font-size: 16px; font-weight: 600; margin-bottom: 8px">Nessun prodotto presente</p>
+                        <p style="font-size: 16px; font-weight: 600; margin-bottom: 8px">
+                          Nessun prodotto presente
+                        </p>
                         <p style="font-size: 14px">Clicca su "Nuovo Prodotto" per iniziare</p>
                       </div>
                     </td>
@@ -102,7 +120,11 @@ import { SearchSelectComponent, SelectOption } from '../../shared/search-select.
       <br /><br />
     </section>
 
-    <app-modal [open]="modalOpen()" [title]="editing() ? 'Modifica Prodotto' : 'Nuovo Prodotto'" (closed)="modalOpen.set(false)">
+    <app-modal
+      [open]="modalOpen()"
+      [title]="editing() ? 'Modifica Prodotto' : 'Nuovo Prodotto'"
+      (closed)="modalOpen.set(false)"
+    >
       <form (ngSubmit)="salva()">
         <div class="modal-body">
           <div class="form-group">
@@ -141,8 +163,12 @@ import { SearchSelectComponent, SelectOption } from '../../shared/search-select.
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="modalOpen.set(false)"><span>Annulla</span></button>
-          <button type="submit" class="btn btn-primary" [disabled]="saving()"><span>Salva</span></button>
+          <button type="button" class="btn btn-secondary" (click)="modalOpen.set(false)">
+            <span>Annulla</span>
+          </button>
+          <button type="submit" class="btn btn-primary" [disabled]="saving()">
+            <span>Salva</span>
+          </button>
         </div>
       </form>
     </app-modal>
@@ -157,7 +183,9 @@ export class ProdottiComponent {
   protected readonly qty = formatQuantity;
   protected readonly filtro = persistedSignal('search_prodotti');
   protected readonly lista = computed(() =>
-    this.svc.prodotti().filter((p) => matchesAny(this.filtro(), p.nome, p.marca_nome, p.descrizione)),
+    this.svc
+      .prodotti()
+      .filter((p) => matchesAny(this.filtro(), p.nome, p.marca_nome, p.descrizione)),
   );
   protected readonly marcheOptions = computed<SelectOption[]>(() =>
     this.marcheSvc.marche().map((m) => ({ id: m.id, label: m.nome })),
@@ -188,7 +216,11 @@ export class ProdottiComponent {
     if (!nome) return this.dialog.warning('⚠️ Il nome del prodotto è obbligatorio!');
     if (this.marcaId() === null) return this.dialog.warning('⚠️ Seleziona una marca dalla lista!');
 
-    const payload = { nome, marca_id: this.marcaId(), descrizione: this.descrizione().trim() || null };
+    const payload = {
+      nome,
+      marca_id: this.marcaId(),
+      descrizione: this.descrizione().trim() || null,
+    };
     this.saving.set(true);
     try {
       const edit = this.editing();
@@ -208,7 +240,10 @@ export class ProdottiComponent {
       title: 'Elimina Prodotto',
       message: 'Sei sicuro di voler eliminare questo prodotto?',
       detail: p.nome,
-      warning: p.giacenza > 0 ? `Giacenza residua: ${formatQuantity(p.giacenza)} — il prodotto non può essere eliminato.` : undefined,
+      warning:
+        p.giacenza > 0
+          ? `Giacenza residua: ${formatQuantity(p.giacenza)} — il prodotto non può essere eliminato.`
+          : undefined,
       danger: true,
       confirmLabel: 'Elimina',
     });

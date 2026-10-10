@@ -28,7 +28,11 @@ const utentiService = {
     const hashedPassword = await bcrypt.hash(password, 10);
     let result;
     try {
-      result = await repo.crea(username.trim(), hashedPassword, new Date().toISOString());
+      result = await repo.crea(
+        username.trim(),
+        hashedPassword,
+        new Date().toISOString(),
+      );
     } catch (err) {
       if (String(err.message).includes("UNIQUE"))
         throw new HttpError(400, "Username già esistente");

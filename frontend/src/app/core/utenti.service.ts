@@ -35,14 +35,22 @@ export class UtentiService {
     return firstValueFrom(this.http.post<UtenteSaveResponse>(this.url, { username, password }));
   }
 
-  update(id: number, body: { username: string; password?: string; current_user: string | null }): Promise<UtenteSaveResponse> {
+  update(
+    id: number,
+    body: { username: string; password?: string; current_user: string | null },
+  ): Promise<UtenteSaveResponse> {
     return firstValueFrom(this.http.put<UtenteSaveResponse>(`${this.url}/${id}`, body));
   }
 
-  remove(id: number, currentUser: string): Promise<{ success: boolean; utente_eliminato: boolean }> {
+  remove(
+    id: number,
+    currentUser: string,
+  ): Promise<{ success: boolean; utente_eliminato: boolean }> {
     const params = new HttpParams().set('current_user', currentUser);
     return firstValueFrom(
-      this.http.delete<{ success: boolean; utente_eliminato: boolean }>(`${this.url}/${id}`, { params }),
+      this.http.delete<{ success: boolean; utente_eliminato: boolean }>(`${this.url}/${id}`, {
+        params,
+      }),
     );
   }
 }

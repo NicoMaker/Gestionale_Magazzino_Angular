@@ -24,8 +24,8 @@
 
 body {
   font-family:
-    -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, sans-serif;
+    -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+    sans-serif;
   background: var(--bg-main);
   color: var(--text-primary);
   line-height: 1.6;
@@ -170,7 +170,7 @@ body {
 }
 
 .nav-item::before {
-  content: "";
+  content: '';
   position: absolute;
   left: 0;
   top: 0;
@@ -1144,43 +1144,43 @@ tbody tr:hover {
   }
 
   /* Delete button - ROSSO for mobile */
-  .btn-icon[onclick*="delete"],
-  .btn-icon[onclick*="Delete"],
-  .btn-icon[onclick*="elimina"] {
+  .btn-icon[onclick*='delete'],
+  .btn-icon[onclick*='Delete'],
+  .btn-icon[onclick*='elimina'] {
     border-color: #ef4444 !important;
     background: rgba(239, 68, 68, 0.1) !important;
   }
 
-  .btn-icon[onclick*="delete"] svg,
-  .btn-icon[onclick*="Delete"] svg,
-  .btn-icon[onclick*="elimina"] svg {
+  .btn-icon[onclick*='delete'] svg,
+  .btn-icon[onclick*='Delete'] svg,
+  .btn-icon[onclick*='elimina'] svg {
     stroke: #ef4444 !important;
   }
 
-  .btn-icon[onclick*="delete"]:hover,
-  .btn-icon[onclick*="Delete"]:hover,
-  .btn-icon[onclick*="elimina"]:hover {
+  .btn-icon[onclick*='delete']:hover,
+  .btn-icon[onclick*='Delete']:hover,
+  .btn-icon[onclick*='elimina']:hover {
     background: #ef4444 !important;
     border-color: #ef4444 !important;
   }
 
-  .btn-icon[onclick*="delete"]:hover svg,
-  .btn-icon[onclick*="Delete"]:hover svg,
-  .btn-icon[onclick*="elimina"]:hover svg {
+  .btn-icon[onclick*='delete']:hover svg,
+  .btn-icon[onclick*='Delete']:hover svg,
+  .btn-icon[onclick*='elimina']:hover svg {
     stroke: white !important;
   }
 
   /* Edit button - BLU for mobile */
-  .btn-icon[onclick*="edit"],
-  .btn-icon[onclick*="Edit"],
-  .btn-icon[onclick*="modifica"] {
+  .btn-icon[onclick*='edit'],
+  .btn-icon[onclick*='Edit'],
+  .btn-icon[onclick*='modifica'] {
     border-color: #3b82f6 !important;
     background: rgba(59, 130, 246, 0.1) !important;
   }
 
-  .btn-icon[onclick*="edit"] svg,
-  .btn-icon[onclick*="Edit"] svg,
-  .btn-icon[onclick*="modifica"] svg {
+  .btn-icon[onclick*='edit'] svg,
+  .btn-icon[onclick*='Edit'] svg,
+  .btn-icon[onclick*='modifica'] svg {
     stroke: #3b82f6 !important;
   }
 }
@@ -1808,7 +1808,7 @@ tbody tr:hover {
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 1px;
-  font-family: "Courier New", monospace;
+  font-family: 'Courier New', monospace;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1848,11 +1848,7 @@ tbody tr:hover {
    ============================================ */
 
 .company-info-sidebar {
-  background: linear-gradient(
-    135deg,
-    rgba(99, 102, 241, 0.1) 0%,
-    rgba(168, 85, 247, 0.05) 100%
-  );
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(168, 85, 247, 0.05) 100%);
   border-radius: 12px;
   padding: 16px;
   margin-bottom: 16px;
@@ -1995,11 +1991,7 @@ tbody tr:hover {
 /* Variante alternativa con bordo colorato */
 .company-info-sidebar.bordered {
   border-left: 4px solid #6366f1;
-  background: linear-gradient(
-    90deg,
-    rgba(99, 102, 241, 0.08) 0%,
-    rgba(168, 85, 247, 0.03) 100%
-  );
+  background: linear-gradient(90deg, rgba(99, 102, 241, 0.08) 0%, rgba(168, 85, 247, 0.03) 100%);
 }
 
 /* Effetto glassmorphism più pronunciato */
@@ -2024,8 +2016,8 @@ tbody tr:hover {
 
 /* 2. Spazio a destra nell'input */
 /* Aggiunge spazio di padding a destra per non coprire il testo con l'icona */
-.input-container input[type="password"],
-.input-container input[type="text"] {
+.input-container input[type='password'],
+.input-container input[type='text'] {
   /* Assumi che questo selector sia valido per il tuo input, altrimenti usa il tuo selector generico per input */
   padding-right: 40px !important;
   width: 100%;
@@ -2040,10 +2032,7 @@ tbody tr:hover {
   width: 20px; /* Dimensione piccola (20x20px) */
   height: 20px;
   cursor: pointer;
-  color: var(
-    --text-secondary,
-    #64748b
-  ); /* Usa il colore del testo secondario */
+  color: var(--text-secondary, #64748b); /* Usa il colore del testo secondario */
   transition: color 0.2s ease;
   z-index: 10; /* Assicura che sia cliccabile sopra l'input */
 }
@@ -2202,7 +2191,7 @@ tbody tr:hover {
 
 .example-content pre {
   margin: 0;
-  font-family: "Courier New", monospace;
+  font-family: 'Courier New', monospace;
   font-size: 13px;
   line-height: 1.8;
   color: var(--text-primary);
@@ -2479,11 +2468,7 @@ tbody tr:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(
-    135deg,
-    rgba(239, 68, 68, 0.15) 0%,
-    rgba(220, 38, 38, 0.1) 100%
-  );
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(220, 38, 38, 0.1) 100%);
   color: var(--danger);
   flex-shrink: 0;
   box-shadow: 0 8px 16px rgba(239, 68, 68, 0.15);
@@ -2544,41 +2529,25 @@ tbody tr:hover {
 }
 
 .alert-icon.success {
-  background: linear-gradient(
-    135deg,
-    rgba(16, 185, 129, 0.15) 0%,
-    rgba(5, 150, 105, 0.1) 100%
-  );
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(5, 150, 105, 0.1) 100%);
   color: var(--secondary);
   border-color: rgba(16, 185, 129, 0.2);
 }
 
 .alert-icon.error {
-  background: linear-gradient(
-    135deg,
-    rgba(239, 68, 68, 0.15) 0%,
-    rgba(220, 38, 38, 0.1) 100%
-  );
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(220, 38, 38, 0.1) 100%);
   color: var(--danger);
   border-color: rgba(239, 68, 68, 0.2);
 }
 
 .alert-icon.warning {
-  background: linear-gradient(
-    135deg,
-    rgba(245, 158, 11, 0.15) 0%,
-    rgba(217, 119, 6, 0.1) 100%
-  );
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(217, 119, 6, 0.1) 100%);
   color: var(--warning);
   border-color: rgba(245, 158, 11, 0.2);
 }
 
 .alert-icon.info {
-  background: linear-gradient(
-    135deg,
-    rgba(99, 102, 241, 0.15) 0%,
-    rgba(79, 70, 229, 0.1) 100%
-  );
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(79, 70, 229, 0.1) 100%);
   color: var(--primary);
   border-color: rgba(99, 102, 241, 0.2);
 }
@@ -2599,7 +2568,7 @@ tbody tr:hover {
   background: linear-gradient(145deg, #f8fafc 0%, #f1f5f9 100%);
   border-radius: 12px;
   border: 1px solid rgba(226, 232, 240, 0.8);
-  font-family: "Courier New", monospace;
+  font-family: 'Courier New', monospace;
   font-size: 13px;
   overflow-x: auto;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
@@ -2939,8 +2908,8 @@ tbody tr:hover {
   }
 
   /* Checkbox e radio più grandi */
-  input[type="checkbox"],
-  input[type="radio"] {
+  input[type='checkbox'],
+  input[type='radio'] {
     width: 24px !important;
     height: 24px !important;
     margin-right: 10px !important;
@@ -3195,56 +3164,56 @@ tbody tr:hover {
   }
 
   /* Edit button - BLU */
-  .btn-icon[onclick*="edit"],
-  .btn-icon[onclick*="Edit"],
-  .btn-icon[onclick*="modifica"] {
+  .btn-icon[onclick*='edit'],
+  .btn-icon[onclick*='Edit'],
+  .btn-icon[onclick*='modifica'] {
     border-color: #3b82f6;
     background: rgba(59, 130, 246, 0.1);
   }
 
-  .btn-icon[onclick*="edit"] svg,
-  .btn-icon[onclick*="Edit"] svg,
-  .btn-icon[onclick*="modifica"] svg {
+  .btn-icon[onclick*='edit'] svg,
+  .btn-icon[onclick*='Edit'] svg,
+  .btn-icon[onclick*='modifica'] svg {
     stroke: #3b82f6;
   }
 
-  .btn-icon[onclick*="edit"]:hover,
-  .btn-icon[onclick*="Edit"]:hover,
-  .btn-icon[onclick*="modifica"]:hover {
+  .btn-icon[onclick*='edit']:hover,
+  .btn-icon[onclick*='Edit']:hover,
+  .btn-icon[onclick*='modifica']:hover {
     background: #3b82f6;
     border-color: #3b82f6;
   }
 
-  .btn-icon[onclick*="edit"]:hover svg,
-  .btn-icon[onclick*="Edit"]:hover svg,
-  .btn-icon[onclick*="modifica"]:hover svg {
+  .btn-icon[onclick*='edit']:hover svg,
+  .btn-icon[onclick*='Edit']:hover svg,
+  .btn-icon[onclick*='modifica']:hover svg {
     stroke: white;
   }
 
   /* Delete button - ROSSO */
-  .btn-icon[onclick*="delete"],
-  .btn-icon[onclick*="Delete"],
-  .btn-icon[onclick*="elimina"] {
+  .btn-icon[onclick*='delete'],
+  .btn-icon[onclick*='Delete'],
+  .btn-icon[onclick*='elimina'] {
     border-color: #ef4444;
     background: rgba(239, 68, 68, 0.1);
   }
 
-  .btn-icon[onclick*="delete"] svg,
-  .btn-icon[onclick*="Delete"] svg,
-  .btn-icon[onclick*="elimina"] svg {
+  .btn-icon[onclick*='delete'] svg,
+  .btn-icon[onclick*='Delete'] svg,
+  .btn-icon[onclick*='elimina'] svg {
     stroke: #ef4444;
   }
 
-  .btn-icon[onclick*="delete"]:hover,
-  .btn-icon[onclick*="Delete"]:hover,
-  .btn-icon[onclick*="elimina"]:hover {
+  .btn-icon[onclick*='delete']:hover,
+  .btn-icon[onclick*='Delete']:hover,
+  .btn-icon[onclick*='elimina']:hover {
     background: #ef4444;
     border-color: #ef4444;
   }
 
-  .btn-icon[onclick*="delete"]:hover svg,
-  .btn-icon[onclick*="Delete"]:hover svg,
-  .btn-icon[onclick*="elimina"]:hover svg {
+  .btn-icon[onclick*='delete']:hover svg,
+  .btn-icon[onclick*='Delete']:hover svg,
+  .btn-icon[onclick*='elimina']:hover svg {
     stroke: white;
   }
 }
@@ -3269,43 +3238,43 @@ tbody tr:hover {
   }
 
   /* Edit button - BLU for iPad */
-  .btn-icon[onclick*="edit"],
-  .btn-icon[onclick*="Edit"],
-  .btn-icon[onclick*="modifica"] {
+  .btn-icon[onclick*='edit'],
+  .btn-icon[onclick*='Edit'],
+  .btn-icon[onclick*='modifica'] {
     border-color: #3b82f6 !important;
     background: rgba(59, 130, 246, 0.15) !important;
   }
 
-  .btn-icon[onclick*="edit"] svg,
-  .btn-icon[onclick*="Edit"] svg,
-  .btn-icon[onclick*="modifica"] svg {
+  .btn-icon[onclick*='edit'] svg,
+  .btn-icon[onclick*='Edit'] svg,
+  .btn-icon[onclick*='modifica'] svg {
     stroke: #3b82f6 !important;
   }
 
   /* Delete button - ROSSO for iPad */
-  .btn-icon[onclick*="delete"],
-  .btn-icon[onclick*="Delete"],
-  .btn-icon[onclick*="elimina"] {
+  .btn-icon[onclick*='delete'],
+  .btn-icon[onclick*='Delete'],
+  .btn-icon[onclick*='elimina'] {
     border-color: #ef4444 !important;
     background: rgba(239, 68, 68, 0.15) !important;
   }
 
-  .btn-icon[onclick*="delete"] svg,
-  .btn-icon[onclick*="Delete"] svg,
-  .btn-icon[onclick*="elimina"] svg {
+  .btn-icon[onclick*='delete'] svg,
+  .btn-icon[onclick*='Delete'] svg,
+  .btn-icon[onclick*='elimina'] svg {
     stroke: #ef4444 !important;
   }
 
-  .btn-icon[onclick*="delete"]:hover,
-  .btn-icon[onclick*="Delete"]:hover,
-  .btn-icon[onclick*="elimina"]:hover {
+  .btn-icon[onclick*='delete']:hover,
+  .btn-icon[onclick*='Delete']:hover,
+  .btn-icon[onclick*='elimina']:hover {
     background: #ef4444 !important;
     border-color: #ef4444 !important;
   }
 
-  .btn-icon[onclick*="delete"]:hover svg,
-  .btn-icon[onclick*="Delete"]:hover svg,
-  .btn-icon[onclick*="elimina"]:hover svg {
+  .btn-icon[onclick*='delete']:hover svg,
+  .btn-icon[onclick*='Delete']:hover svg,
+  .btn-icon[onclick*='elimina']:hover svg {
     stroke: white !important;
   }
 }

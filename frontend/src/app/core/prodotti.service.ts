@@ -25,8 +25,14 @@ export class ProdottiService {
   constructor() {
     inject(SocketService)
       .on(
-        'prodotto_aggiunto', 'prodotto_modificato', 'prodotto_eliminato', 'prodotti_aggiornati',
-        'marca_modificata', 'marca_eliminata', 'magazzino_aggiornato', 'dati_aggiornati',
+        'prodotto_aggiunto',
+        'prodotto_modificato',
+        'prodotto_eliminato',
+        'prodotti_aggiornati',
+        'marca_modificata',
+        'marca_eliminata',
+        'magazzino_aggiornato',
+        'dati_aggiornati',
       )
       .pipe(debounceTime(250))
       .subscribe(() => this.loaded && void this.load());

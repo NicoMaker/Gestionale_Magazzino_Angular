@@ -58,7 +58,9 @@ export class RiepilogoComponent {
 
   protected readonly filtro = persistedSignal('search_riepilogo');
   protected readonly lista = computed(() =>
-    this.svc.riepilogo().filter((r) => matchesAny(this.filtro(), r.nome, r.marca_nome, r.descrizione)),
+    this.svc
+      .riepilogo()
+      .filter((r) => matchesAny(this.filtro(), r.nome, r.marca_nome, r.descrizione)),
   );
   protected readonly totale = computed(() =>
     formatCurrency(this.lista().reduce((s, r) => s + Number(r.valore_totale || 0), 0)),
@@ -69,6 +71,7 @@ export class RiepilogoComponent {
   }
 
   protected stampa(): void {
-    if (!this.print.printGiacenze('riepilogo', this.lista())) this.dialog.warning('Nessun prodotto da stampare');
+    if (!this.print.printGiacenze('riepilogo', this.lista()))
+      this.dialog.warning('Nessun prodotto da stampare');
   }
 }

@@ -61,20 +61,36 @@ import { ModalComponent } from '../../shared/modal.component';
                     <strong style="font-size: 15px">{{ m.nome }}</strong>
                   </td>
                   <td class="text-center-badge">
-                    <span class="prodotti-badge" [class.has-products]="m.prodotti_count > 0" [class.empty]="!m.prodotti_count">
+                    <span
+                      class="prodotti-badge"
+                      [class.has-products]="m.prodotti_count > 0"
+                      [class.empty]="!m.prodotti_count"
+                    >
                       {{ m.prodotti_count || 0 }}
                     </span>
                   </td>
                   <td class="text-right">
-                    <button type="button" class="btn-icon btn-modifica" title="Modifica" (click)="openModal(m)">
+                    <button
+                      type="button"
+                      class="btn-icon btn-modifica"
+                      title="Modifica"
+                      (click)="openModal(m)"
+                    >
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
                         <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
                       </svg>
                     </button>
-                    <button type="button" class="btn-icon btn-elimina" title="Elimina" (click)="elimina(m)">
+                    <button
+                      type="button"
+                      class="btn-icon btn-elimina"
+                      title="Elimina"
+                      (click)="elimina(m)"
+                    >
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                        <path
+                          d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+                        />
                       </svg>
                     </button>
                   </td>
@@ -84,7 +100,9 @@ import { ModalComponent } from '../../shared/modal.component';
                   <tr>
                     <td colspan="3" class="text-center">
                       <div style="padding: 40px 20px; color: var(--text-secondary)">
-                        <p style="font-size: 16px; font-weight: 600; margin-bottom: 8px">Nessuna marca presente</p>
+                        <p style="font-size: 16px; font-weight: 600; margin-bottom: 8px">
+                          Nessuna marca presente
+                        </p>
                         <p style="font-size: 14px">Clicca su "Nuova Marca" per iniziare</p>
                       </div>
                     </td>
@@ -98,7 +116,11 @@ import { ModalComponent } from '../../shared/modal.component';
       <br /><br />
     </section>
 
-    <app-modal [open]="modalOpen()" [title]="editing() ? 'Modifica Marca' : 'Nuova Marca'" (closed)="modalOpen.set(false)">
+    <app-modal
+      [open]="modalOpen()"
+      [title]="editing() ? 'Modifica Marca' : 'Nuova Marca'"
+      (closed)="modalOpen.set(false)"
+    >
       <form (ngSubmit)="salva()">
         <div class="modal-body">
           <div class="form-group">
@@ -115,8 +137,12 @@ import { ModalComponent } from '../../shared/modal.component';
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="modalOpen.set(false)"><span>Annulla</span></button>
-          <button type="submit" class="btn btn-primary" [disabled]="saving()"><span>Salva</span></button>
+          <button type="button" class="btn btn-secondary" (click)="modalOpen.set(false)">
+            <span>Annulla</span>
+          </button>
+          <button type="submit" class="btn btn-primary" [disabled]="saving()">
+            <span>Salva</span>
+          </button>
         </div>
       </form>
     </app-modal>
@@ -128,7 +154,9 @@ export class MarcheComponent {
   private readonly toast = inject(NotificationService);
 
   protected readonly filtro = persistedSignal('search_marche');
-  protected readonly lista = computed(() => this.svc.marche().filter((m) => matchesAny(this.filtro(), m.nome)));
+  protected readonly lista = computed(() =>
+    this.svc.marche().filter((m) => matchesAny(this.filtro(), m.nome)),
+  );
 
   protected readonly modalOpen = signal(false);
   protected readonly editing = signal<Marca | null>(null);
@@ -166,7 +194,10 @@ export class MarcheComponent {
     const ok = await this.dialog.confirm({
       title: 'Elimina Marca',
       message: `Sei sicuro di voler eliminare la marca "${m.nome}"?`,
-      warning: m.prodotti_count > 0 ? `Ci sono ${m.prodotti_count} prodotti collegati: l'eliminazione non è consentita.` : undefined,
+      warning:
+        m.prodotti_count > 0
+          ? `Ci sono ${m.prodotti_count} prodotti collegati: l'eliminazione non è consentita.`
+          : undefined,
       danger: true,
       confirmLabel: 'Elimina',
     });

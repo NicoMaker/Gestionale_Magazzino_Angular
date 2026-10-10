@@ -22,7 +22,9 @@ export class AuthService {
     // Se il mio account viene modificato/eliminato da un altro dispositivo → logout
     this.socket.on('utente_modificato').subscribe(({ data }) => {
       if (data?.oldUsername && data.oldUsername === this.username()) {
-        this.forceLogout('Il tuo account è stato modificato da un altro dispositivo. Effettua di nuovo il login.');
+        this.forceLogout(
+          'Il tuo account è stato modificato da un altro dispositivo. Effettua di nuovo il login.',
+        );
       }
     });
     this.socket.on('utente_eliminato').subscribe(({ data }) => {

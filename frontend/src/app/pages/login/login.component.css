@@ -1,4 +1,5 @@
-.login-page, .login-page * {
+.login-page,
+.login-page * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -6,10 +7,10 @@
 
 .login-page {
   font-family:
-    "Inter",
+    'Inter',
     -apple-system,
     BlinkMacSystemFont,
-    "Segoe UI",
+    'Segoe UI',
     Roboto,
     sans-serif;
   min-height: 100vh;
@@ -24,26 +25,14 @@
 
 /* Animated background pattern */
 .login-page::before {
-  content: "";
+  content: '';
   position: absolute;
   width: 100%;
   height: 100%;
   background-image:
-    radial-gradient(
-      circle at 20% 50%,
-      rgba(99, 102, 241, 0.15) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 80% 80%,
-      rgba(139, 92, 246, 0.15) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 40% 20%,
-      rgba(59, 130, 246, 0.1) 0%,
-      transparent 50%
-    );
+    radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 40% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
   animation: float 15s ease-in-out infinite;
 }
 
@@ -244,7 +233,7 @@
 }
 
 .btn-login::before {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
   background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
@@ -321,7 +310,7 @@
 }
 
 .error-message::before {
-  content: "⚠️";
+  content: '⚠️';
   font-size: 18px;
 }
 
@@ -391,7 +380,7 @@
   font-size: 15px;
   font-weight: 800;
   color: #6366f1;
-  font-family: "Courier New", monospace;
+  font-family: 'Courier New', monospace;
 }
 
 /* Responsive */

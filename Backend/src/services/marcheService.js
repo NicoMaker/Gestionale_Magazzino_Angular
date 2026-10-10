@@ -9,7 +9,8 @@ const marcheService = {
   },
 
   async crea(nome) {
-    if (!nome || !nome.trim()) throw new HttpError(400, "Nome marca obbligatorio");
+    if (!nome || !nome.trim())
+      throw new HttpError(400, "Nome marca obbligatorio");
     const data_creazione = new Date().toISOString();
     let result;
     try {
@@ -21,11 +22,17 @@ const marcheService = {
     }
     realtime.emit("marca_aggiunta");
     realtime.emit("marche_aggiornate");
-    return { id: result.lastID, nome: nome.trim(), data_creazione, prodotti_count: 0 };
+    return {
+      id: result.lastID,
+      nome: nome.trim(),
+      data_creazione,
+      prodotti_count: 0,
+    };
   },
 
   async aggiorna(id, nome) {
-    if (!nome || !nome.trim()) throw new HttpError(400, "Nome marca obbligatorio");
+    if (!nome || !nome.trim())
+      throw new HttpError(400, "Nome marca obbligatorio");
     let result;
     try {
       result = await repo.aggiorna(id, nome.trim());

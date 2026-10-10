@@ -28,7 +28,13 @@ export class MovimentiService {
 
   constructor() {
     inject(SocketService)
-      .on('dati_aggiornati', 'magazzino_aggiornato', 'movimento_creato', 'movimento_modificato', 'movimento_eliminato')
+      .on(
+        'dati_aggiornati',
+        'magazzino_aggiornato',
+        'movimento_creato',
+        'movimento_modificato',
+        'movimento_eliminato',
+      )
       .pipe(debounceTime(250))
       .subscribe(() => this.loaded && void this.load());
   }
@@ -59,7 +65,10 @@ export class MovimentiService {
     await this.refreshAll();
   }
 
-  async bulkScarico(scarichi: BulkScaricoItem[], nomeDocumento: string): Promise<BulkScaricoResponse['risultati']> {
+  async bulkScarico(
+    scarichi: BulkScaricoItem[],
+    nomeDocumento: string,
+  ): Promise<BulkScaricoResponse['risultati']> {
     const res = await firstValueFrom(
       this.http.post<BulkScaricoResponse>(`${this.url}/bulk-scarico`, {
         scarichi,

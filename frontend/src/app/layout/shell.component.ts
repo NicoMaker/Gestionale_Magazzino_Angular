@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, ElementRef, HostListener, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  HostListener,
+  inject,
+  signal,
+} from '@angular/core';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
 import { environment } from '../../environments/environment';
@@ -162,11 +169,13 @@ export class ShellComponent {
     this.socket.connect();
 
     // Ricorda la sezione attiva e chiude il menu mobile ad ogni navigazione
-    this.router.events.pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd)).subscribe((e) => {
-      const section = e.urlAfterRedirects.split('?')[0].split('/').filter(Boolean)[0];
-      if (section) localStorage.setItem('activeSection', section);
-      this.menuOpen.set(false);
-    });
+    this.router.events
+      .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
+      .subscribe((e) => {
+        const section = e.urlAfterRedirects.split('?')[0].split('/').filter(Boolean)[0];
+        if (section) localStorage.setItem('activeSection', section);
+        this.menuOpen.set(false);
+      });
   }
 
   protected toggleMenu(e: Event): void {

@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input, output, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  input,
+  output,
+  signal,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ModalComponent } from '../../shared/modal.component';
 import { MovimentiService } from '../../core/movimenti.service';
@@ -23,7 +31,8 @@ interface Riga {
   template: `
     <app-modal [open]="open()" size="xl" title="📄 Carica da Fattura PDF" (closed)="chiudi()">
       <p modal-subtitle style="font-size: 13px; color: #64748b; margin: 4px 0 0">
-        Il sistema legge la fattura — clicca <strong>Carica</strong> su ogni riga per salvare il movimento
+        Il sistema legge la fattura — clicca <strong>Carica</strong> su ogni riga per salvare il
+        movimento
       </p>
       <div class="modal-body">
         @if (step() === 'upload') {
@@ -35,7 +44,13 @@ interface Riga {
             (dragleave)="drag.set(false)"
             (drop)="onDrop($event)"
           >
-            <svg style="width: 48px; height: 48px; color: #94a3b8; display: block; margin: 0 auto 14px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <svg
+              style="width: 48px; height: 48px; color: #94a3b8; display: block; margin: 0 auto 14px"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
               <path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9" />
               <polyline points="9 15 12 12 15 15" />
               <line x1="12" y1="12" x2="12" y2="21" />
@@ -44,16 +59,28 @@ interface Riga {
               {{ file() ? '📄 ' + file()!.name : 'Trascina il PDF qui o clicca per sfogliare' }}
             </p>
             <p style="font-size: 12px; color: #94a3b8; margin: 0">Fatture, DDT, bolle, ordini</p>
-            <input #fileInput type="file" accept="application/pdf" style="display: none" (change)="onFile($event)" />
+            <input
+              #fileInput
+              type="file"
+              accept="application/pdf"
+              style="display: none"
+              (change)="onFile($event)"
+            />
           </div>
           <div class="cfp-ai-info">
             <span>
-              Verranno estratti <strong>numero documento, fornitore, data, prodotti, quantità e prezzi</strong>. Potrai
-              verificare e correggere ogni dato prima di caricare.
+              Verranno estratti
+              <strong>numero documento, fornitore, data, prodotti, quantità e prezzi</strong>.
+              Potrai verificare e correggere ogni dato prima di caricare.
             </span>
           </div>
           <div style="text-align: center; margin-top: 24px">
-            <button type="button" class="btn btn-primary cfp-btn-main" [disabled]="!file()" (click)="analizza()">
+            <button
+              type="button"
+              class="btn btn-primary cfp-btn-main"
+              [disabled]="!file()"
+              (click)="analizza()"
+            >
               🔍 Analizza PDF
             </button>
           </div>
@@ -62,7 +89,9 @@ interface Riga {
         @if (step() === 'loading') {
           <div style="text-align: center; padding: 48px 24px">
             <div class="cfp-spinner"></div>
-            <p style="font-size: 15px; font-weight: 600; color: #475569; margin-top: 20px">{{ msg() }}</p>
+            <p style="font-size: 15px; font-weight: 600; color: #475569; margin-top: 20px">
+              {{ msg() }}
+            </p>
           </div>
         }
 
@@ -74,11 +103,21 @@ interface Riga {
           <div class="cfp-form-grid">
             <div class="form-group">
               <label>Numero Documento / Fattura *</label>
-              <input type="text" class="cfp-input" placeholder="es. FT/2024/001" [(ngModel)]="numeroDoc" />
+              <input
+                type="text"
+                class="cfp-input"
+                placeholder="es. FT/2024/001"
+                [(ngModel)]="numeroDoc"
+              />
             </div>
             <div class="form-group">
               <label>Fornitore *</label>
-              <input type="text" class="cfp-input" placeholder="Nome fornitore" [(ngModel)]="fornitore" />
+              <input
+                type="text"
+                class="cfp-input"
+                placeholder="Nome fornitore"
+                [(ngModel)]="fornitore"
+              />
             </div>
             <div class="form-group">
               <label>Data Documento</label>
@@ -88,7 +127,10 @@ interface Riga {
 
           <div class="cfp-section-title" style="margin-top: 20px">
             <span class="cfp-step-num">2</span> Prodotti estratti
-            <span style="margin-left: auto; font-size: 13px; font-weight: 600" [style.color]="trovati() === righe().length ? '#10b981' : '#f59e0b'">
+            <span
+              style="margin-left: auto; font-size: 13px; font-weight: 600"
+              [style.color]="trovati() === righe().length ? '#10b981' : '#f59e0b'"
+            >
               {{ trovati() }} di {{ righe().length }} trovati nel DB
             </span>
           </div>
@@ -106,33 +148,79 @@ interface Riga {
               </thead>
               <tbody>
                 @for (r of righe(); track $index; let i = $index) {
-                  <tr [class.cfp-row-ok]="r.prodotto_id" [class.cfp-row-warn]="!r.prodotto_id" [style.opacity]="r.stato === 'done' ? 0.55 : 1">
+                  <tr
+                    [class.cfp-row-ok]="r.prodotto_id"
+                    [class.cfp-row-warn]="!r.prodotto_id"
+                    [style.opacity]="r.stato === 'done' ? 0.55 : 1"
+                  >
                     <td style="text-align: center">
-                      <input type="checkbox" style="width: 16px; height: 16px; cursor: pointer" [checked]="r.includi" [disabled]="r.stato === 'done'" (change)="patch(i, { includi: $any($event.target).checked })" />
+                      <input
+                        type="checkbox"
+                        style="width: 16px; height: 16px; cursor: pointer"
+                        [checked]="r.includi"
+                        [disabled]="r.stato === 'done'"
+                        (change)="patch(i, { includi: $any($event.target).checked })"
+                      />
                     </td>
                     <td>
                       <div class="cfp-pdf-nome" [title]="r.nome_pdf">{{ r.nome_pdf || '—' }}</div>
                     </td>
                     <td>
-                      <select class="cfp-select" [disabled]="r.stato === 'done'" (change)="setProdotto(i, $any($event.target).value)">
+                      <select
+                        class="cfp-select"
+                        [disabled]="r.stato === 'done'"
+                        (change)="setProdotto(i, $any($event.target).value)"
+                      >
                         <option value="">— Non associare —</option>
                         @for (p of prodotti.prodotti(); track p.id) {
-                          <option [value]="p.id" [selected]="p.id === r.prodotto_id">{{ p.nome }}{{ p.marca_nome ? ' — ' + p.marca_nome : '' }}</option>
+                          <option [value]="p.id" [selected]="p.id === r.prodotto_id">
+                            {{ p.nome }}{{ p.marca_nome ? ' — ' + p.marca_nome : '' }}
+                          </option>
                         }
                       </select>
-                      <span [class]="r.prodotto_id ? 'cfp-badge-ok' : 'cfp-badge-warn'">{{ r.prodotto_id ? '✓ Trovato' : '⚠ Non trovato' }}</span>
+                      <span [class]="r.prodotto_id ? 'cfp-badge-ok' : 'cfp-badge-warn'">{{
+                        r.prodotto_id ? '✓ Trovato' : '⚠ Non trovato'
+                      }}</span>
                     </td>
-                    <td><input type="number" class="cfp-num-input" min="0.01" step="0.01" [value]="r.quantita ?? ''" [disabled]="r.stato === 'done'" (change)="patch(i, { quantita: +$any($event.target).value || null })" /></td>
-                    <td><input type="number" class="cfp-num-input" min="0.01" step="0.01" [value]="r.prezzo ?? ''" [disabled]="r.stato === 'done'" (change)="patch(i, { prezzo: +$any($event.target).value || null })" /></td>
+                    <td>
+                      <input
+                        type="number"
+                        class="cfp-num-input"
+                        min="0.01"
+                        step="0.01"
+                        [value]="r.quantita ?? ''"
+                        [disabled]="r.stato === 'done'"
+                        (change)="patch(i, { quantita: +$any($event.target).value || null })"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="number"
+                        class="cfp-num-input"
+                        min="0.01"
+                        step="0.01"
+                        [value]="r.prezzo ?? ''"
+                        [disabled]="r.stato === 'done'"
+                        (change)="patch(i, { prezzo: +$any($event.target).value || null })"
+                      />
+                    </td>
                     <td style="text-align: center">
                       <button
                         type="button"
                         class="btn btn-primary cfp-btn-usa"
                         [disabled]="r.stato !== 'idle'"
-                        [style.background]="r.stato === 'done' ? 'linear-gradient(135deg,#10b981,#059669)' : null"
+                        [style.background]="
+                          r.stato === 'done' ? 'linear-gradient(135deg,#10b981,#059669)' : null
+                        "
                         (click)="carica(i)"
                       >
-                        {{ r.stato === 'done' ? '✓ Caricato' : r.stato === 'loading' ? '⏳' : 'Carica' }}
+                        {{
+                          r.stato === 'done'
+                            ? '✓ Caricato'
+                            : r.stato === 'loading'
+                              ? '⏳'
+                              : 'Carica'
+                        }}
                       </button>
                     </td>
                   </tr>
@@ -142,8 +230,8 @@ interface Riga {
           </div>
           <p class="cfp-note">
             💡 Prodotti non riconosciuti: selezionali dal menu. Prodotti mancanti: creali prima in
-            <strong>Prodotti</strong>. Documento e fornitore in cima vengono usati per tutti i carichi. Ogni riga viene salvata
-            <strong>immediatamente</strong> cliccando Carica.
+            <strong>Prodotti</strong>. Documento e fornitore in cima vengono usati per tutti i
+            carichi. Ogni riga viene salvata <strong>immediatamente</strong> cliccando Carica.
           </p>
         }
 
@@ -154,7 +242,12 @@ interface Riga {
       <div class="modal-footer">
         @if (step() === 'risultati') {
           <button type="button" class="btn btn-secondary" (click)="reset()">Nuovo PDF</button>
-          <button type="button" class="btn btn-primary" [disabled]="daCaricare() === 0" (click)="caricaSelezionati()">
+          <button
+            type="button"
+            class="btn btn-primary"
+            [disabled]="daCaricare() === 0"
+            (click)="caricaSelezionati()"
+          >
             Carica selezionati ({{ daCaricare() }})
           </button>
         }
@@ -224,13 +317,17 @@ export class FatturaPdfModalComponent {
       this.step.set('loading');
       this.msg.set('📖 Lettura PDF...');
       const testo = await this.pdf.extractText(f);
-      if (!testo.trim()) throw new Error('Il PDF non contiene testo leggibile (potrebbe essere scansionato).');
+      if (!testo.trim())
+        throw new Error('Il PDF non contiene testo leggibile (potrebbe essere scansionato).');
 
       this.msg.set('🔍 Analisi e ricerca prodotti nel database...');
       const d = this.pdf.parseFattura(testo);
       await this.prodotti.ensureLoaded();
 
-      this.numeroDoc = (d.numero_documento ?? '').replace(/\.pdf$/i, '').replace(/^scaricato da /i, '').trim();
+      this.numeroDoc = (d.numero_documento ?? '')
+        .replace(/\.pdf$/i, '')
+        .replace(/^scaricato da /i, '')
+        .trim();
       this.fornitore = d.fornitore ?? '';
       this.data = d.data_documento;
       this.righe.set(

@@ -1,5 +1,13 @@
 import {
-  ChangeDetectionStrategy, Component, computed, effect, inject, input, output, signal, untracked,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  inject,
+  input,
+  output,
+  signal,
+  untracked,
 } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { DecimalInputDirective } from '../../shared/decimal-input.directive';
@@ -42,7 +50,10 @@ import { apiErrorMessage, formatQuantity, parseDecimal, round2, todayISO } from 
           @if (prodotto(); as p) {
             <div class="stock-info" style="display: block">
               <strong>Giacenza attuale:</strong>
-              <span>{{ p.nome }}{{ p.marca_nome ? ' (' + p.marca_nome + ')' : '' }} - Giacenza: {{ qty(p.giacenza) }} PZ/L</span>
+              <span
+                >{{ p.nome }}{{ p.marca_nome ? ' (' + p.marca_nome + ')' : '' }} - Giacenza:
+                {{ qty(p.giacenza) }} PZ/L</span
+              >
             </div>
           }
 
@@ -84,7 +95,12 @@ import { apiErrorMessage, formatQuantity, parseDecimal, round2, todayISO } from 
             @if (isCarico()) {
               <div class="form-group">
                 <label for="movimentoFattura">Documento/Fattura *</label>
-                <input type="text" id="movimentoFattura" formControlName="fattura" placeholder="es. FT/2024/001" />
+                <input
+                  type="text"
+                  id="movimentoFattura"
+                  formControlName="fattura"
+                  placeholder="es. FT/2024/001"
+                />
               </div>
             }
           </div>
@@ -92,13 +108,22 @@ import { apiErrorMessage, formatQuantity, parseDecimal, round2, todayISO } from 
           @if (isCarico()) {
             <div class="form-group">
               <label for="movimentoFornitore">Fornitore *</label>
-              <input type="text" id="movimentoFornitore" formControlName="fornitore" placeholder="es. Fornitore SRL" />
+              <input
+                type="text"
+                id="movimentoFornitore"
+                formControlName="fornitore"
+                placeholder="es. Fornitore SRL"
+              />
             </div>
           }
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="closed.emit()"><span>Annulla</span></button>
-          <button type="submit" class="btn btn-primary" [disabled]="saving()"><span>Salva</span></button>
+          <button type="button" class="btn btn-secondary" (click)="closed.emit()">
+            <span>Annulla</span>
+          </button>
+          <button type="submit" class="btn btn-primary" [disabled]="saving()">
+            <span>Salva</span>
+          </button>
         </div>
       </form>
     </app-modal>
@@ -136,10 +161,16 @@ export class MovimentoModalComponent {
 
   protected readonly prodotto = computed(() => this.prodottiSvc.byId(this.prodottoId()));
   protected readonly opzioniProdotti = computed<SelectOption[]>(() =>
-    this.prodottiSvc.prodotti().map((p) => ({ id: p.id, label: p.nome, meta: p.marca_nome, extra: p.descrizione })),
+    this.prodottiSvc
+      .prodotti()
+      .map((p) => ({ id: p.id, label: p.nome, meta: p.marca_nome, extra: p.descrizione })),
   );
   protected readonly titolo = computed(() =>
-    this.movimento() ? 'Modifica Movimento' : this.draft()?.riordino ? 'Nuovo Movimento (Riordino)' : 'Nuovo Movimento',
+    this.movimento()
+      ? 'Modifica Movimento'
+      : this.draft()?.riordino
+        ? 'Nuovo Movimento (Riordino)'
+        : 'Nuovo Movimento',
   );
 
   constructor() {
@@ -196,8 +227,10 @@ export class MovimentoModalComponent {
     const fattura = v.fattura.trim();
     const fornitore = v.fornitore.trim();
     if (carico) {
-      if (!prezzo || prezzo <= 0) return this.dialog.warning('Il prezzo deve essere maggiore di 0 per i carichi!');
-      if (!fattura || !fornitore) return this.dialog.warning('Documento e Fornitore sono obbligatori per i carichi!');
+      if (!prezzo || prezzo <= 0)
+        return this.dialog.warning('Il prezzo deve essere maggiore di 0 per i carichi!');
+      if (!fattura || !fornitore)
+        return this.dialog.warning('Documento e Fornitore sono obbligatori per i carichi!');
     }
 
     const payload = {

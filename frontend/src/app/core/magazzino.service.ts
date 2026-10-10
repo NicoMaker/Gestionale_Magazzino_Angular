@@ -16,7 +16,13 @@ export class MagazzinoService {
 
   constructor() {
     inject(SocketService)
-      .on('magazzino_aggiornato', 'movimento_creato', 'movimento_modificato', 'movimento_eliminato', 'prodotti_aggiornati')
+      .on(
+        'magazzino_aggiornato',
+        'movimento_creato',
+        'movimento_modificato',
+        'movimento_eliminato',
+        'prodotti_aggiornati',
+      )
       .pipe(debounceTime(250))
       .subscribe(() => this.loaded && void this.loadRiepilogo());
   }

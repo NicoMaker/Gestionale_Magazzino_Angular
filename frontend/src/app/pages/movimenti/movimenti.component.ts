@@ -5,14 +5,25 @@ import { Movimento } from '../../core/models';
 import { MovimentiService, MovimentoDraft } from '../../core/movimenti.service';
 import { persistedSignal } from '../../core/persisted';
 import { ProdottiService } from '../../core/prodotti.service';
-import { apiErrorMessage, formatCurrency, formatDateIT, formatQuantity, matchesAny } from '../../core/utils';
+import {
+  apiErrorMessage,
+  formatCurrency,
+  formatDateIT,
+  formatQuantity,
+  matchesAny,
+} from '../../core/utils';
 import { FatturaPdfModalComponent } from './fattura-pdf-modal.component';
 import { ImportPdfModalComponent } from './import-pdf-modal.component';
 import { MovimentoModalComponent } from './movimento-modal.component';
 
 @Component({
   selector: 'app-movimenti',
-  imports: [FormsModule, MovimentoModalComponent, ImportPdfModalComponent, FatturaPdfModalComponent],
+  imports: [
+    FormsModule,
+    MovimentoModalComponent,
+    ImportPdfModalComponent,
+    FatturaPdfModalComponent,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section class="content-section active">
@@ -33,7 +44,12 @@ import { MovimentoModalComponent } from './movimento-modal.component';
             <div class="movimenti-date-wrap">
               <div class="movimenti-date-field">
                 <label class="movimenti-date-label">Data Inizio</label>
-                <input type="date" class="filter-input movimenti-date-input" [ngModel]="dal()" (ngModelChange)="setDal($event)" />
+                <input
+                  type="date"
+                  class="filter-input movimenti-date-input"
+                  [ngModel]="dal()"
+                  (ngModelChange)="setDal($event)"
+                />
               </div>
               <div class="movimenti-date-arrow">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -43,13 +59,24 @@ import { MovimentoModalComponent } from './movimento-modal.component';
               </div>
               <div class="movimenti-date-field">
                 <label class="movimenti-date-label">Data Fine</label>
-                <input type="date" class="filter-input movimenti-date-input" [min]="dal()" [ngModel]="al()" (ngModelChange)="setAl($event)" />
+                <input
+                  type="date"
+                  class="filter-input movimenti-date-input"
+                  [min]="dal()"
+                  [ngModel]="al()"
+                  (ngModelChange)="setAl($event)"
+                />
               </div>
             </div>
           </div>
 
           <div class="movimenti-btn-row">
-            <button type="button" class="btn btn-reset-filtri" title="Cancella date" (click)="dal.set(''); al.set('')">
+            <button
+              type="button"
+              class="btn btn-reset-filtri"
+              title="Cancella date"
+              (click)="dal.set(''); al.set('')"
+            >
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <polyline points="1 4 1 10 7 10" />
                 <path d="M3.51 15a9 9 0 1 0 .49-4.5" />
@@ -65,7 +92,12 @@ import { MovimentoModalComponent } from './movimento-modal.component';
               </svg>
               <span>Scarica da PDF</span>
             </button>
-            <button type="button" class="btn btn-primary" style="background: linear-gradient(135deg, #6366f1, #8b5cf6)" (click)="fatturaOpen.set(true)">
+            <button
+              type="button"
+              class="btn btn-primary"
+              style="background: linear-gradient(135deg, #6366f1, #8b5cf6)"
+              (click)="fatturaOpen.set(true)"
+            >
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
                 <polyline points="14 2 14 8 20 8" />
@@ -128,16 +160,29 @@ import { MovimentoModalComponent } from './movimento-modal.component';
                   <td>{{ m.marca_nome || '-' }}</td>
                   <td>
                     @if (m.prodotto_descrizione) {
-                      <small>{{ m.prodotto_descrizione.length > 30 ? m.prodotto_descrizione.slice(0, 30) + '…' : m.prodotto_descrizione }}</small>
+                      <small>{{
+                        m.prodotto_descrizione.length > 30
+                          ? m.prodotto_descrizione.slice(0, 30) + '…'
+                          : m.prodotto_descrizione
+                      }}</small>
                     } @else {
                       <span style="color: #999">-</span>
                     }
                   </td>
                   <td>
-                    <span class="badge" [class.badge-danger]="m.tipo === 'scarico'" [class.badge-success]="m.tipo === 'carico'">{{ m.tipo.toUpperCase() }}</span>
+                    <span
+                      class="badge"
+                      [class.badge-danger]="m.tipo === 'scarico'"
+                      [class.badge-success]="m.tipo === 'carico'"
+                      >{{ m.tipo.toUpperCase() }}</span
+                    >
                   </td>
-                  <td [class]="m.tipo === 'scarico' ? 'text-red' : 'text-green'">{{ qty(m.quantita) }}</td>
-                  <td [class]="m.tipo === 'scarico' ? 'text-red' : 'text-green'">{{ prezzoUnit(m) }}</td>
+                  <td [class]="m.tipo === 'scarico' ? 'text-red' : 'text-green'">
+                    {{ qty(m.quantita) }}
+                  </td>
+                  <td [class]="m.tipo === 'scarico' ? 'text-red' : 'text-green'">
+                    {{ prezzoUnit(m) }}
+                  </td>
                   <td [class]="m.tipo === 'scarico' ? 'text-red' : 'text-green'">
                     <strong>{{ cur(abs(m.prezzo_totale_movimento)) }}</strong>
                   </td>
@@ -146,23 +191,49 @@ import { MovimentoModalComponent } from './movimento-modal.component';
                   <td class="text-right">
                     <div class="action-buttons">
                       @if (m.tipo === 'carico') {
-                        <button type="button" class="btn-icon btn-riordina" title="Riordina questo carico" (click)="riordina(m)">
-                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <button
+                          type="button"
+                          class="btn-icon btn-riordina"
+                          title="Riordina questo carico"
+                          (click)="riordina(m)"
+                        >
+                          <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
                             <circle cx="9" cy="21" r="1" />
                             <circle cx="20" cy="21" r="1" />
-                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                            <path
+                              d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+                            />
                           </svg>
                         </button>
                       }
-                      <button type="button" class="btn-icon btn-modifica" title="Modifica" (click)="apriModal(m)">
+                      <button
+                        type="button"
+                        class="btn-icon btn-modifica"
+                        title="Modifica"
+                        (click)="apriModal(m)"
+                      >
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                           <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
                           <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
                         </svg>
                       </button>
-                      <button type="button" class="btn-icon btn-elimina" title="Elimina" (click)="elimina(m)">
+                      <button
+                        type="button"
+                        class="btn-icon btn-elimina"
+                        title="Elimina"
+                        (click)="elimina(m)"
+                      >
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                          <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                          <path
+                            d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+                          />
                         </svg>
                       </button>
                     </div>
@@ -173,8 +244,12 @@ import { MovimentoModalComponent } from './movimento-modal.component';
                   <tr>
                     <td colspan="11" class="text-center">
                       <div style="padding: 40px 20px; color: var(--text-secondary)">
-                        <p style="font-size: 16px; font-weight: 600; margin-bottom: 8px">Nessun movimento presente</p>
-                        <p style="font-size: 14px">Clicca su <strong>Nuovo</strong> per registrare un carico o scarico</p>
+                        <p style="font-size: 16px; font-weight: 600; margin-bottom: 8px">
+                          Nessun movimento presente
+                        </p>
+                        <p style="font-size: 14px">
+                          Clicca su <strong>Nuovo</strong> per registrare un carico o scarico
+                        </p>
                       </div>
                     </td>
                   </tr>
@@ -221,17 +296,21 @@ export class MovimentiComponent {
     const tipo = this.tipo();
     const dal = this.dal();
     const al = this.al();
-    return this.svc.movimenti().filter(
-      (m) =>
-        (tipo === 'tutti' || m.tipo === tipo) &&
-        matchesAny(this.filtro(), m.prodotto_nome, m.marca_nome, m.prodotto_descrizione) &&
-        (!dal || m.data_movimento >= dal) &&
-        (!al || m.data_movimento <= al),
-    );
+    return this.svc
+      .movimenti()
+      .filter(
+        (m) =>
+          (tipo === 'tutti' || m.tipo === tipo) &&
+          matchesAny(this.filtro(), m.prodotto_nome, m.marca_nome, m.prodotto_descrizione) &&
+          (!dal || m.data_movimento >= dal) &&
+          (!al || m.data_movimento <= al),
+      );
   });
 
   constructor() {
-    void Promise.all([this.svc.load(), this.prodotti.load()]).catch((e) => this.dialog.error(apiErrorMessage(e)));
+    void Promise.all([this.svc.load(), this.prodotti.load()]).catch((e) =>
+      this.dialog.error(apiErrorMessage(e)),
+    );
 
     // Arrivo dalla pagina Riordino: apre subito il modal precompilato
     const pending = this.svc.pendingDraft();
@@ -271,7 +350,12 @@ export class MovimentiComponent {
 
   protected riordina(m: Movimento): void {
     this.editing.set(null);
-    this.draft.set({ prodotto_id: m.prodotto_id, tipo: 'carico', riordino: true, fornitore: m.fornitore_cliente_id });
+    this.draft.set({
+      prodotto_id: m.prodotto_id,
+      tipo: 'carico',
+      riordino: true,
+      fornitore: m.fornitore_cliente_id,
+    });
     this.modalOpen.set(true);
   }
 

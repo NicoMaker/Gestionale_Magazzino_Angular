@@ -20,7 +20,12 @@ import { GiacenzaTableComponent } from '../../shared/giacenza-table.component';
           <p>Visualizza giacenze a una data specifica</p>
         </div>
         <div class="date-filter">
-          <input type="date" class="input-date" [ngModel]="data()" (ngModelChange)="cambiaData($event)" />
+          <input
+            type="date"
+            class="input-date"
+            [ngModel]="data()"
+            (ngModelChange)="cambiaData($event)"
+          />
           <div class="search-wrapper">
             <input
               type="text"
@@ -30,7 +35,12 @@ import { GiacenzaTableComponent } from '../../shared/giacenza-table.component';
               (ngModelChange)="filtro.set($event)"
             />
           </div>
-          <button type="button" class="btn btn-reset-filtri" title="Cancella data" (click)="cambiaData('')">
+          <button
+            type="button"
+            class="btn btn-reset-filtri"
+            title="Cancella data"
+            (click)="cambiaData('')"
+          >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <polyline points="1 4 1 10 7 10" />
               <path d="M3.51 15a9 9 0 1 0 .49-4.5" />

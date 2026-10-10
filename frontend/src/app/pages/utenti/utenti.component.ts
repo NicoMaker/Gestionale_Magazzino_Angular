@@ -71,7 +71,14 @@ import { ModalComponent } from '../../shared/modal.component';
                       [attr.aria-label]="'Modifica ' + u.username"
                       (click)="openModal(u)"
                     >
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
                         <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
                         <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
                       </svg>
@@ -83,9 +90,18 @@ import { ModalComponent } from '../../shared/modal.component';
                       [attr.aria-label]="'Elimina ' + u.username"
                       (click)="elimina(u)"
                     >
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
                         <path d="M3 6h18" />
-                        <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6m3 0V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                        <path
+                          d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6m3 0V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"
+                        />
                       </svg>
                     </button>
                   </td>
@@ -95,9 +111,15 @@ import { ModalComponent } from '../../shared/modal.component';
                   <tr>
                     <td colspan="2" class="text-center">
                       <div style="padding: 40px 20px; color: var(--text-secondary)">
-                        <p style="font-size: 16px; font-weight: 600; margin-bottom: 8px">Nessun utente trovato</p>
+                        <p style="font-size: 16px; font-weight: 600; margin-bottom: 8px">
+                          Nessun utente trovato
+                        </p>
                         <p style="font-size: 14px">
-                          {{ filtro() ? 'Prova a modificare il termine di ricerca' : 'Clicca su Nuovo Utente per iniziare' }}
+                          {{
+                            filtro()
+                              ? 'Prova a modificare il termine di ricerca'
+                              : 'Clicca su Nuovo Utente per iniziare'
+                          }}
                         </p>
                       </div>
                     </td>
@@ -111,7 +133,11 @@ import { ModalComponent } from '../../shared/modal.component';
       <br /><br />
     </section>
 
-    <app-modal [open]="modalOpen()" [title]="editing() ? 'Modifica Utente' : 'Nuovo Utente'" (closed)="modalOpen.set(false)">
+    <app-modal
+      [open]="modalOpen()"
+      [title]="editing() ? 'Modifica Utente' : 'Nuovo Utente'"
+      (closed)="modalOpen.set(false)"
+    >
       <form (ngSubmit)="salva()" autocomplete="off">
         <div class="modal-body">
           <div class="form-group">
@@ -133,7 +159,11 @@ import { ModalComponent } from '../../shared/modal.component';
                 [type]="showPassword() ? 'text' : 'password'"
                 id="userPassword"
                 name="password"
-                [placeholder]="editing() ? 'Lascia vuoto per non modificare' : 'Min. 8 caratteri, maiuscola, minuscola, numero'"
+                [placeholder]="
+                  editing()
+                    ? 'Lascia vuoto per non modificare'
+                    : 'Min. 8 caratteri, maiuscola, minuscola, numero'
+                "
                 autocomplete="new-password"
                 [ngModel]="password()"
                 (ngModelChange)="password.set($event)"
@@ -147,7 +177,9 @@ import { ModalComponent } from '../../shared/modal.component';
                 (click)="showPassword.set(!showPassword())"
               >
                 @if (showPassword()) {
-                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.08 2.58" />
+                  <path
+                    d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.08 2.58"
+                  />
                   <line x1="1" y1="1" x2="23" y2="23" />
                   <circle cx="12" cy="12" r="3" />
                 } @else {
@@ -159,8 +191,12 @@ import { ModalComponent } from '../../shared/modal.component';
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="modalOpen.set(false)"><span>Annulla</span></button>
-          <button type="submit" class="btn btn-primary" [disabled]="saving()"><span>Salva</span></button>
+          <button type="button" class="btn btn-secondary" (click)="modalOpen.set(false)">
+            <span>Annulla</span>
+          </button>
+          <button type="submit" class="btn btn-primary" [disabled]="saving()">
+            <span>Salva</span>
+          </button>
         </div>
       </form>
     </app-modal>
@@ -173,7 +209,9 @@ export class UtentiComponent {
   private readonly toast = inject(NotificationService);
 
   protected readonly filtro = persistedSignal('search_utenti');
-  protected readonly lista = computed(() => this.svc.utenti().filter((u) => matchesAny(this.filtro(), u.username)));
+  protected readonly lista = computed(() =>
+    this.svc.utenti().filter((u) => matchesAny(this.filtro(), u.username)),
+  );
 
   protected readonly modalOpen = signal(false);
   protected readonly editing = signal<Utente | null>(null);
@@ -199,7 +237,8 @@ export class UtentiComponent {
     const password = this.password();
     const edit = this.editing();
     if (!username) return this.dialog.warning('Lo username è obbligatorio!');
-    if (!edit && !password) return this.dialog.warning('La password è obbligatoria per un nuovo utente!');
+    if (!edit && !password)
+      return this.dialog.warning('La password è obbligatoria per un nuovo utente!');
 
     this.saving.set(true);
     try {
@@ -240,7 +279,9 @@ export class UtentiComponent {
     try {
       const res = await this.svc.remove(u.id, this.auth.username() ?? '');
       if (res.utente_eliminato) {
-        this.auth.forceLogout('Hai eliminato il tuo account. Verrai disconnesso e dovrai effettuare di nuovo il login.');
+        this.auth.forceLogout(
+          'Hai eliminato il tuo account. Verrai disconnesso e dovrai effettuare di nuovo il login.',
+        );
         return;
       }
       this.toast.success('Utente eliminato con successo!');

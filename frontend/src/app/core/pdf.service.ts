@@ -82,19 +82,37 @@ export class PdfService {
 
   parseScarico(text: string): ParsedScarico {
     const date = this.extractDate(text);
-    const lines = text.split('\n').map((l) => l.trim()).filter(Boolean);
+    const lines = text
+      .split('\n')
+      .map((l) => l.trim())
+      .filter(Boolean);
 
     const start = lines.findIndex((l) => l.toUpperCase().includes('RICAMBI'));
     if (start === -1) return { date, righe: [] };
 
-    const headerKw = ['CODICE', 'RICAMBIO', 'DESCRIZIONE', 'QUANTITA', 'PREZZO', 'IVA', 'ESCLUSA', 'QUANTITÀ'];
+    const headerKw = [
+      'CODICE',
+      'RICAMBIO',
+      'DESCRIZIONE',
+      'QUANTITA',
+      'PREZZO',
+      'IVA',
+      'ESCLUSA',
+      'QUANTITÀ',
+    ];
     let dataStart = start + 1;
     for (let i = start + 1; i < Math.min(start + 10, lines.length); i++) {
       if (headerKw.some((k) => lines[i].toUpperCase().includes(k))) dataStart = i + 1;
       else break;
     }
 
-    const stopKw = ['MANODOPERA', 'TOTALE', 'IVA COMPRESA', 'DESCRIZIONE LAVORAZIONI', 'LAVORAZIONI'];
+    const stopKw = [
+      'MANODOPERA',
+      'TOTALE',
+      'IVA COMPRESA',
+      'DESCRIZIONE LAVORAZIONI',
+      'LAVORAZIONI',
+    ];
     const righe: ScaricoRiga[] = [];
     for (let i = dataStart; i < lines.length; i++) {
       const line = lines[i];
@@ -152,7 +170,10 @@ export class PdfService {
   // ───────────────────────── CARICO (fattura / DDT) ─────────────────────────
 
   parseFattura(text: string): ParsedFattura {
-    const righe = text.split('\n').map((l) => l.trim()).filter(Boolean);
+    const righe = text
+      .split('\n')
+      .map((l) => l.trim())
+      .filter(Boolean);
 
     // 1. numero documento
     let numero: string | null = null;
@@ -197,10 +218,49 @@ export class PdfService {
 
     // 3. fornitore: prima riga "sensata" tra le prime 15
     const stopW = [
-      'fattura', 'ddt', 'bolla', 'ordine', 'data', 'numero', 'via', 'viale', 'corso', 'piazza', 'tel', 'fax',
-      'email', 'pec', 'p.iva', 'partita', 'cod', 'cf', 'rea', 'cap', 'comune', 'prov', 'intestat', 'spett',
-      'cliente', 'destinatar', 'pagament', 'scadenz', 'totale', 'imponibil', 'iva', 'importo', 'descrizione',
-      'quantit', 'prezzo', 'articolo', 'codice', 'riferimento', 'note', 'condizioni', 'banca', 'iban', 'swift',
+      'fattura',
+      'ddt',
+      'bolla',
+      'ordine',
+      'data',
+      'numero',
+      'via',
+      'viale',
+      'corso',
+      'piazza',
+      'tel',
+      'fax',
+      'email',
+      'pec',
+      'p.iva',
+      'partita',
+      'cod',
+      'cf',
+      'rea',
+      'cap',
+      'comune',
+      'prov',
+      'intestat',
+      'spett',
+      'cliente',
+      'destinatar',
+      'pagament',
+      'scadenz',
+      'totale',
+      'imponibil',
+      'iva',
+      'importo',
+      'descrizione',
+      'quantit',
+      'prezzo',
+      'articolo',
+      'codice',
+      'riferimento',
+      'note',
+      'condizioni',
+      'banca',
+      'iban',
+      'swift',
     ];
     let fornitore: string | null = null;
     for (let i = 0; i < Math.min(15, righe.length); i++) {
@@ -217,9 +277,28 @@ export class PdfService {
 
     // 4. righe prodotto
     const skipL = [
-      'totale', 'subtotale', 'imponibile', 'iva', 'sconto', 'trasporto', 'spese', 'acconto', 'saldo', 'netto',
-      'lordo', 'descrizione', 'quantita', 'quantità', 'prezzo', 'importo', 'articolo', 'codice', 'um', 'u.m.',
-      'nr', 'note',
+      'totale',
+      'subtotale',
+      'imponibile',
+      'iva',
+      'sconto',
+      'trasporto',
+      'spese',
+      'acconto',
+      'saldo',
+      'netto',
+      'lordo',
+      'descrizione',
+      'quantita',
+      'quantità',
+      'prezzo',
+      'importo',
+      'articolo',
+      'codice',
+      'um',
+      'u.m.',
+      'nr',
+      'note',
     ];
     const reQta = /\b(\d{1,6}(?:[,.]\d{1,3})?)\s*(l(?:t|itri?)?|pz|pcs|nr|n\.?|pezzi?)?\b/gi;
     const rePrezzo = /€?\s*(\d{1,8}[,.]\d{2})\b/g;
@@ -273,7 +352,11 @@ export class PdfService {
     m = prodotti.find((p) => q.includes(p.nome.toLowerCase()) || p.nome.toLowerCase().includes(q));
     if (m) return m;
 
-    const words = (s: string) => s.toLowerCase().split(/\s+/).filter((w) => w.length > 2);
+    const words = (s: string) =>
+      s
+        .toLowerCase()
+        .split(/\s+/)
+        .filter((w) => w.length > 2);
     const pw = words(q);
     let best = 0;
     let bestM: Prodotto | null = null;

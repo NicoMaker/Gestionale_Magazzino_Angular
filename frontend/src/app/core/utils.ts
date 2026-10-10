@@ -44,7 +44,10 @@ export function todayISO(): string {
 }
 
 /** Estrae il messaggio d'errore dalle risposte del backend ({ error }) */
-export function apiErrorMessage(err: unknown, fallback = 'Errore di connessione al server'): string {
+export function apiErrorMessage(
+  err: unknown,
+  fallback = 'Errore di connessione al server',
+): string {
   if (err instanceof HttpErrorResponse) {
     const body = err.error as { error?: string; message?: string } | string | null;
     if (body && typeof body === 'object') return body.error || body.message || fallback;

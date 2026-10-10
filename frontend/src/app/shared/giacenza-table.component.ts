@@ -29,13 +29,17 @@ import { formatCurrency, formatDateIT, formatQuantity } from '../core/utils';
                 </td>
                 <td>
                   @if (r.descrizione) {
-                    <small>{{ r.descrizione.length > 50 ? r.descrizione.slice(0, 50) + '...' : r.descrizione }}</small>
+                    <small>{{
+                      r.descrizione.length > 50 ? r.descrizione.slice(0, 50) + '...' : r.descrizione
+                    }}</small>
                   } @else {
                     <span style="color: #999">-</span>
                   }
                 </td>
                 <td>
-                  <span [class]="!r.giacenza ? 'badge-giacenza-zero' : 'badge-giacenza'">{{ qty(r.giacenza) }}</span>
+                  <span [class]="!r.giacenza ? 'badge-giacenza-zero' : 'badge-giacenza'">{{
+                    qty(r.giacenza)
+                  }}</span>
                 </td>
                 <td>
                   <strong>{{ cur(r.valore_totale) }}</strong>
@@ -81,7 +85,9 @@ import { formatCurrency, formatDateIT, formatQuantity } from '../core/utils';
               <tr>
                 <td colspan="4" class="text-center">
                   <div style="padding: 40px 20px; color: var(--text-secondary)">
-                    <p style="font-size: 16px; font-weight: 600; margin-bottom: 8px">{{ emptyTitle() }}</p>
+                    <p style="font-size: 16px; font-weight: 600; margin-bottom: 8px">
+                      {{ emptyTitle() }}
+                    </p>
                     <p style="font-size: 14px">{{ emptyText() }}</p>
                   </div>
                 </td>

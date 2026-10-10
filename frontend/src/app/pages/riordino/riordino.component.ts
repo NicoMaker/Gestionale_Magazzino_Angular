@@ -35,7 +35,9 @@ import { apiErrorMessage, matchesAny } from '../../core/utils';
           <div class="riordino-banner-left">
             <div class="riordino-banner-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                <path
+                  d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"
+                />
                 <line x1="12" y1="9" x2="12" y2="13" />
                 <line x1="12" y1="17" x2="12.01" y2="17" />
               </svg>
@@ -44,7 +46,8 @@ import { apiErrorMessage, matchesAny } from '../../core/utils';
               <strong class="riordino-banner-title">Prodotti Esauriti — Riordino Necessario</strong>
               <p class="riordino-banner-sub">
                 I seguenti prodotti hanno giacenza a <strong>zero</strong>. Clicca
-                <span class="riordino-badge-inline">🛒 Riordina</span> per creare subito un nuovo carico.
+                <span class="riordino-badge-inline">🛒 Riordina</span> per creare subito un nuovo
+                carico.
               </p>
             </div>
           </div>
@@ -77,7 +80,9 @@ import { apiErrorMessage, matchesAny } from '../../core/utils';
               </svg>
             </div>
             <p class="riordino-empty-title">Nessun risultato</p>
-            <p class="riordino-empty-sub">Nessun prodotto corrisponde alla ricerca.<br />Prova con un termine diverso.</p>
+            <p class="riordino-empty-sub">
+              Nessun prodotto corrisponde alla ricerca.<br />Prova con un termine diverso.
+            </p>
           </div>
         } @else {
           @for (p of lista(); track p.id) {
@@ -92,12 +97,26 @@ import { apiErrorMessage, matchesAny } from '../../core/utils';
                 </div>
                 @if (p.descrizione) {
                   <div class="riordino-card-descr">
-                    {{ p.descrizione.length > 55 ? p.descrizione.slice(0, 55) + '…' : p.descrizione }}
+                    {{
+                      p.descrizione.length > 55 ? p.descrizione.slice(0, 55) + '…' : p.descrizione
+                    }}
                   </div>
                 }
               </div>
-              <button type="button" class="btn-riordina-card" [title]="'Riordina ' + p.nome" (click)="riordina(p)">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <button
+                type="button"
+                class="btn-riordina-card"
+                [title]="'Riordina ' + p.nome"
+                (click)="riordina(p)"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
                   <circle cx="9" cy="21" r="1" />
                   <circle cx="20" cy="21" r="1" />
                   <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
@@ -120,7 +139,9 @@ export class RiordinoComponent {
 
   protected readonly filtro = persistedSignal('search_riordino');
   protected readonly lista = computed(() =>
-    this.svc.esauriti().filter((p) => matchesAny(this.filtro(), p.nome, p.marca_nome, p.descrizione)),
+    this.svc
+      .esauriti()
+      .filter((p) => matchesAny(this.filtro(), p.nome, p.marca_nome, p.descrizione)),
   );
 
   constructor() {

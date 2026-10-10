@@ -89,7 +89,13 @@ export interface BulkScaricoItem {
 
 export interface BulkScaricoResponse {
   risultati: {
-    success: { codice: string; prodotto_id: number; quantita: number; data_movimento: string; id: number }[];
+    success: {
+      codice: string;
+      prodotto_id: number;
+      quantita: number;
+      data_movimento: string;
+      id: number;
+    }[];
     failed: { codice?: string; reason: string }[];
     notFound: unknown[];
     insufficientStock: {
