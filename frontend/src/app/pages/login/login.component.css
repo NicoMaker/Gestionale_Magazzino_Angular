@@ -22,7 +22,13 @@
   z-index: 10;
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
   background: var(--lg-bg);
   overflow-y: auto;
 }
@@ -75,8 +81,13 @@
 }
 
 @keyframes drift {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(30px, -30px) scale(1.1); }
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(30px, -30px) scale(1.1);
+  }
 }
 
 .brand-top {
@@ -166,8 +177,14 @@
   animation: rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 @keyframes rise {
-  from { opacity: 0; transform: translateY(18px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .mobile-brand {
@@ -221,7 +238,10 @@
   border: 1.5px solid var(--lg-line) !important; /* vince su `input {…!important}` globale */
   border-radius: 14px;
   outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s,
+    background 0.2s;
 }
 .field input:hover {
   border-color: #cbd5e1 !important;
@@ -241,7 +261,10 @@
   color: #94a3b8;
   pointer-events: none;
   transform-origin: left center;
-  transition: transform 0.2s ease, color 0.2s ease, top 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease,
+    top 0.2s ease;
 }
 .field input:focus + label,
 .field input:not(:placeholder-shown) + label {
@@ -278,7 +301,9 @@
   background: transparent;
   color: #94a3b8;
   cursor: pointer;
-  transition: color 0.2s, background 0.2s;
+  transition:
+    color 0.2s,
+    background 0.2s;
 }
 .toggle:hover {
   color: var(--lg-primary);
@@ -315,9 +340,16 @@
   margin-top: 1px;
 }
 @keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-6px); }
-  75% { transform: translateX(6px); }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-6px);
+  }
+  75% {
+    transform: translateX(6px);
+  }
 }
 
 /* Bottone */
@@ -339,7 +371,11 @@
   cursor: pointer;
   background: linear-gradient(135deg, var(--lg-primary), var(--lg-primary-2));
   box-shadow: 0 10px 24px -6px rgba(99, 102, 241, 0.55);
-  transition: transform 0.2s, box-shadow 0.2s, filter 0.2s, background 0.3s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s,
+    filter 0.2s,
+    background 0.3s;
 }
 .btn-login:hover:not(:disabled) {
   transform: translateY(-2px);
@@ -381,7 +417,9 @@
   animation: spin 0.7s linear infinite;
 }
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .hint {
@@ -460,7 +498,10 @@
 
 /* Accessibilità */
 @media (prefers-reduced-motion: reduce) {
-  .orb, .form-wrap, .error-message.show, .spinner {
+  .orb,
+  .form-wrap,
+  .error-message.show,
+  .spinner {
     animation: none;
   }
 }
